@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>La Plebada – Sorteo Pulsar N125 + Xbox Series X</title>
+    <meta name="description"
+        content="La Plebada. Participa por una Pulsar N125, Xbox Series X y 4 premios de $500.000. Boletas desde $3.000.">
+    
+    <!-- FAVICON - Coloca tu favicon en la misma carpeta con el nombre "favicon.ico" -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            color: #1a1a1a;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navbar */
+        .navbar-plebada {
+            background: rgba(255, 255, 255, 0.98) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #eaeaea;
+            padding: 0.75rem 0;
+        }
+
+        /* Hero */
+        .hero-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 3rem 0 2rem 0;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: #1a1a1a;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, #1a1a1a 0%, #555 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .fecha-badge {
+            display: inline-block;
+            background: #1a1a1a;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Cards de premios - NUEVO DISEÑO MÁS ESTÉTICO */
+        .premio-card {
+            background: #ffffff;
+            border: 1px solid #eef2f6;
+            border-radius: 20px;
+            padding: 1.25rem 1.5rem;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .premio-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            border-color: #ddd;
+        }
+
+        .premio-icon-wrapper {
+            width: 48px;
+            height: 48px;
+            background: #f0f0f0;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .premio-icon-wrapper i {
+            font-size: 1.6rem;
+            color: #1a1a1a;
+        }
+
+        .premio-categoria {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #999;
+            font-weight: 600;
+        }
+
+        .premio-nombre {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #1a1a1a;
+        }
+
+        .premio-valor {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* FICHAS BENDECIDAS - Número SOBRE la ficha */
+        .fichas-container {
+            background: #f8f9fa;
+            border: 1px solid #eef2f6;
+            border-radius: 24px;
+            padding: 1.5rem;
+        }
+
+        .fichas-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        .ficha-item {
+            position: relative;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .ficha-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contenedor de la ficha con posición relativa para el número */
+        .ficha-imagen-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+        }
+
+        .ficha-imagen {
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            border: 2px solid #eef2f6;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .ficha-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Número SOBRE la ficha (centrado) */
+        .ficha-numero {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Inter', monospace;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #1a1a1a;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(4px);
+            padding: 4px 8px;
+            border-radius: 30px;
+            z-index: 2;
+            white-space: nowrap;
+        }
+
+        /* Ficha especial (premiada) */
+        .ficha-item.especial .ficha-imagen {
+            border-color: #1a1a1a;
+            background: #1a1a1a;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .ficha-item.especial .ficha-numero {
+            color: white;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Precio boleta */
+        .precio-card {
+            background: #1a1a1a;
+            border-radius: 28px;
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .precio-label {
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .precio-valor {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* Paquetes de compra */
+        .paquetes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+
+        .paquete-card {
+            background: #ffffff;
+            border: 2px solid #eef2f6;
+            border-radius: 20px;
+            padding: 1.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .btn-check:checked+.paquete-card {
+            border-color: #1a1a1a;
+            background: #fafafa;
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .paquete-card .cantidad {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .paquete-card .precio {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .paquete-card .precio-original {
+            font-size: 0.75rem;
+            color: #aaa;
+            text-decoration: line-through;
+        }
+
+        .descuento-badge {
+            position: absolute;
+            top: -10px;
+            right: 12px;
+            background: #1a1a1a;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 40px;
+        }
+
+        .badge-popular {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #e67e22;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 40px;
+        }
+
+        /* Input personalizado */
+        .custom-input-group {
+            background: #ffffff;
+            border: 2px solid #eef2f6;
+            border-radius: 20px;
+            padding: 1rem;
+            transition: all 0.25s ease;
+        }
+
+        .custom-input-group:focus-within {
+            border-color: #1a1a1a;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .custom-input-group label {
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #999;
+            font-weight: 600;
+        }
+
+        /* Barra de progreso */
+        .progress-wrapper {
+            background: #f8f9fa;
+            border-radius: 20px;
+            padding: 1rem;
+            border: 1px solid #eef2f6;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .progress-track {
+            background: #eef2f6;
+            border-radius: 20px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: #1a1a1a;
+            border-radius: 20px;
+            height: 100%;
+            width: 0%;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Botones sociales */
+        .btn-social {
+            position: fixed;
+            right: 20px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+        .btn-instagram { bottom: 140px; }
+        .btn-whatsapp { bottom: 80px; }
+        .btn-facebook { bottom: 20px; }
+        
+        .notification-bubble {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-social img {
+            border-radius: 12px;
+            width: 45px;
+        }
+
+        /* Carrito móvil */
+        .mobile-cart-bar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border-top: 1px solid #eef2f6;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        .mobile-cart-bar.visible {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        .footer-link {
+            color: #666;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .footer-link:hover {
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-plebada sticky-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-3" href="#">
+                <!-- COLOCA TU LOGO EN LA MISMA CARPETA CON NOMBRE "logo.png" -->
+                <img src="logo.png" alt="La Plebada" height="50" onerror="this.style.display='none'">
+                <span class="font-serif fw-bold fs-3" style="color: #1a1a1a;">La Plebada</span>
+            </a>
+            <div class="d-none d-lg-flex align-items-center ms-auto">
+                <span class="badge bg-dark text-white px-3 py-2 rounded-pill">
+                    <i class="ti ti-calendar-event me-1"></i>
+                    Sorteo: 29 de Mayo • Medellín 🎫
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- BOTONES SOCIALES -->
+    <div class="btn-instagram btn-social">
+        <a href="https://www.instagram.com/tu_perfil" target="_blank">
+            <div class="notification-bubble">1</div>
+            <img src="https://public-assets-hv.herveleventos.com/img/instagram.png" alt="Instagram">
+        </a>
+    </div>
+    <div class="btn-whatsapp btn-social">
+        <a href="https://wa.me/573000000000?text=Hola%2C%20quiero%20participar" target="_blank">
+            <div class="notification-bubble">1</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 39 39">
+                <path fill="#25D366" d="M10.7 32.8l.6.3c2.5 1.5 5.3 2.2 8.1 2.2 8.8 0 16-7.2 16-16 0-4.2-1.7-8.3-4.7-11.3s-7-4.7-11.3-4.7c-8.8 0-16 7.2-15.9 16.1 0 3 .9 5.9 2.4 8.4l.4.6-1.6 5.9 6-1.5z"></path>
+                <path fill="#FFF" d="M32.4 6.4C29 2.9 24.3 1 19.5 1 9.3 1 1.1 9.3 1.2 19.4c0 3.2.9 6.3 2.4 9.1L1 38l9.7-2.5c2.7 1.5 5.7 2.2 8.7 2.2 10.1 0 18.3-8.3 18.3-18.4 0-4.9-1.9-9.5-5.3-12.9zM19.5 34.6c-2.7 0-5.4-.7-7.7-2.1l-.6-.3-5.8 1.5L6.9 28l-.4-.6c-4.4-7.1-2.3-16.5 4.9-20.9s16.5-2.3 20.9 4.9 2.3 16.5-4.9 20.9c-2.3 1.5-5.1 2.3-7.9 2.3zm8.8-11.1l-1.1-.5s-1.6-.7-2.6-1.2c-.1 0-.2-.1-.3-.1-.3 0-.5.1-.7.2 0 0-.1.1-1.5 1.7-.1.2-.3.3-.5.3h-.1c-.1 0-.3-.1-.4-.2l-.5-.2c-1.1-.5-2.1-1.1-2.9-1.9-.2-.2-.5-.4-.7-.6-.7-.7-1.4-1.5-1.9-2.4l-.1-.2c-.1-.1-.1-.2-.2-.4 0-.2 0-.4.1-.5 0 0 .4-.5.7-.8.2-.2.3-.5.5-.7.2-.3.3-.7.2-1-.1-.5-1.3-3.2-1.6-3.8-.2-.3-.4-.4-.7-.5h-1.1c-.2 0-.4.1-.6.1l-.1.1c-.2.1-.4.3-.6.4-.2.2-.3.4-.5.6-.7.9-1.1 2-1.1 3.1 0 .8.2 1.6.5 2.3l.1.3c.9 1.9 2.1 3.6 3.7 5.1l.4.4c.3.3.6.5.8.8 2.1 1.8 4.5 3.1 7.2 3.8.3.1.7.1 1 .2h1c.5 0 1.1-.2 1.5-.4.3-.2.5-.2.7-.4l.2-.2c.2-.2.4-.3.6-.5s.4-.4.5-.6c.2-.4.3-.9.4-1.4v-.7s-.1-.1-.3-.2z"></path>
+            </svg>
+        </a>
+    </div>
+    <div class="btn-facebook btn-social">
+        <a href="https://www.facebook.com/tu_perfil" target="_blank">
+            <div class="notification-bubble">1</div>
+            <img src="https://public-assets-hv.herveleventos.com/img/facebook.png" alt="Facebook">
+        </a>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row g-5 align-items-start">
+                <div class="col-lg-6">
+                    <div class="fecha-badge">
+                        <i class="ti ti-ticket me-1"></i> Sorteo Oficial
+                    </div>
+                    <h1 class="hero-title mb-4">
+                        Gana la <span class="highlight">Pulsar N125</span><br>
+                        y más premios increíbles
+                    </h1>
+                    
+                    <!-- CARRUSEL DE PREMIOS -->
+                    <div class="card border-0 bg-transparent shadow-none rounded-4 overflow-hidden">
+                        <section id="main-carousel" class="splide">
+                            <div class="splide__track">
+                                <ul class="splide__list">
+                                    <li class="splide__slide">
+                                        <img src="moto.jpg" 
+                                             alt="Pulsar N125" 
+                                             class="w-100 rounded-3" 
+                                             style="aspect-ratio: 16/10; object-fit: cover;"
+                                             onerror="this.src='https://placehold.co/800x500/e0e0e0/1a1a1a?text=Pulsar+N125'">
+                                    </li>
+                                    <li class="splide__slide">
+                                        <img src="xbox.jpg" 
+                                             alt="Xbox Series X" 
+                                             class="w-100 rounded-3" 
+                                             style="aspect-ratio: 16/10; object-fit: cover;"
+                                             onerror="this.src='https://placehold.co/800x500/e0e0e0/1a1a1a?text=Xbox+Series+X'">
+                                    </li>
+                                    <li class="splide__slide">
+                                        <img src="dinero.jpg" 
+                                             alt="$500.000" 
+                                             class="w-100 rounded-3" 
+                                             style="aspect-ratio: 16/10; object-fit: cover;"
+                                             onerror="this.src='https://placehold.co/800x500/e0e0e0/1a1a1a?text=%24500.000'">
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section id="thumbnail-carousel" class="splide mt-3" style="max-width: 200px; margin: 0 auto;">
+                            <div class="splide__track">
+                                <ul class="splide__list">
+                                    <li class="splide__slide"><img src="moto.jpg" onerror="this.src='https://placehold.co/60x60/e0e0e0/1a1a1a?text=Moto'" style="width: 60px; height: 50px; object-fit: cover; border-radius: 8px;"></li>
+                                    <li class="splide__slide"><img src="xbox.jpg" onerror="this.src='https://placehold.co/60x60/e0e0e0/1a1a1a?text=Xbox'" style="width: 60px; height: 50px; object-fit: cover; border-radius: 8px;"></li>
+                                    <li class="splide__slide"><img src="dinero.jpg" onerror="this.src='https://placehold.co/60x60/e0e0e0/1a1a1a?text=%24500k'" style="width: 60px; height: 50px; object-fit: cover; border-radius: 8px;"></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <!-- PREMIOS - NUEVO DISEÑO MÁS ESTÉTICO SIN EMOJIS -->
+                    <div class="premio-card d-flex align-items-center gap-3">
+                        <div class="premio-icon-wrapper">
+                            <i class="ti ti-motorbike"></i>
+                        </div>
+                        <div>
+                            <div class="premio-categoria">PREMI0 MAYOR</div>
+                            <div class="premio-nombre fw-bold fs-5">Pulsar N125 0KM</div>
+                        </div>
+                    </div>
+                    
+                    <div class="premio-card d-flex align-items-center gap-3">
+                        <div class="premio-icon-wrapper">
+                            <i class="ti ti-device-gamepad"></i>
+                        </div>
+                        <div>
+                            <div class="premio-categoria">SEGUNDO PREMIO</div>
+                            <div class="premio-nombre fw-bold fs-5">Xbox Series X</div>
+                        </div>
+                    </div>
+                    
+                    <div class="premio-card d-flex align-items-center gap-3">
+                        <div class="premio-icon-wrapper">
+                            <i class="ti ti-cash"></i>
+                        </div>
+                        <div>
+                            <div class="premio-categoria">4 GANADORES</div>
+                            <div class="premio-nombre fw-bold fs-5">$500.000 cada uno</div>
+                        </div>
+                    </div>
+
+                    <!-- FICHAS BENDECIDAS - NÚMERO SOBRE LA FICHA -->
+                    <div class="fichas-container mb-4">
+                        <div class="fw-bold mb-3 text-center" style="font-size: 0.75rem; letter-spacing: 1.5px;">
+                            🎯 FICHAS BENDECIDAS - Ganan $200.000 cada una
+                        </div>
+                        <div class="fichas-grid" id="fichasGrid">
+                            <div class="ficha-item especial" data-numero="2315">
+                                <div class="ficha-imagen-container">
+                                    <div class="ficha-imagen">
+                                        <img src="ficha.png" onerror="this.parentElement.innerHTML='<span style=\'font-size:1.5rem;\'>🎲</span>'">
+                                    </div>
+                                    <span class="ficha-numero">2315</span>
+                                </div>
+                            </div>
+                            <div class="ficha-item" data-numero="1299">
+                                <div class="ficha-imagen-container">
+                                    <div class="ficha-imagen">
+                                        <img src="ficha.png" onerror="this.parentElement.innerHTML='<span style=\'font-size:1.5rem;\'>🎲</span>'">
+                                    </div>
+                                    <span class="ficha-numero">1299</span>
+                                </div>
+                            </div>
+                            <div class="ficha-item" data-numero="0098">
+                                <div class="ficha-imagen-container">
+                                    <div class="ficha-imagen">
+                                        <img src="ficha.png" onerror="this.parentElement.innerHTML='<span style=\'font-size:1.5rem;\'>🎲</span>'">
+                                    </div>
+                                    <span class="ficha-numero">0098</span>
+                                </div>
+                            </div>
+                            <div class="ficha-item especial" data-numero="0314">
+                                <div class="ficha-imagen-container">
+                                    <div class="ficha-imagen">
+                                        <img src="ficha.png" onerror="this.parentElement.innerHTML='<span style=\'font-size:1.5rem;\'>🎲</span>'">
+                                    </div>
+                                    <span class="ficha-numero">0314</span>
+                                </div>
+                            </div>
+                            <div class="ficha-item" data-numero="6710">
+                                <div class="ficha-imagen-container">
+                                    <div class="ficha-imagen">
+                                        <img src="ficha.png" onerror="this.parentElement.innerHTML='<span style=\'font-size:1.5rem;\'>🎲</span>'">
+                                    </div>
+                                    <span class="ficha-numero">6710</span>
+                                </div>
+                            </div>
+                            <div class="ficha-item" data-numero="0000">
+                                <div class="ficha-imagen-container">
+                                    <div class="ficha-imagen">
+                                        <img src="ficha.png" onerror="this.parentElement.innerHTML='<span style=\'font-size:1.5rem;\'>🎲</span>'">
+                                    </div>
+                                    <span class="ficha-numero">0000</span>
+                                </div>
+                            </div>
+                            <div class="ficha-item" data-numero="1111">
+                                <div class="ficha-imagen-container">
+                                    <div class="ficha-imagen">
+                                        <img src="ficha.png" onerror="this.parentElement.innerHTML='<span style=\'font-size:1.5rem;\'>🎲</span>'">
+                                    </div>
+                                    <span class="ficha-numero">1111</span>
+                                </div>
+                            </div>
+                            <div class="ficha-item especial" data-numero="6666">
+                                <div class="ficha-imagen-container">
+                                    <div class="ficha-imagen">
+                                        <img src="ficha.png" onerror="this.parentElement.innerHTML='<span style=\'font-size:1.5rem;\'>🎲</span>'">
+                                    </div>
+                                    <span class="ficha-numero">6666</span>
+                                </div>
+                            </div>
+                            <div class="ficha-item" data-numero="3456">
+                                <div class="ficha-imagen-container">
+                                    <div class="ficha-imagen">
+                                        <img src="ficha.png" onerror="this.parentElement.innerHTML='<span style=\'font-size:1.5rem;\'>🎲</span>'">
+                                    </div>
+                                    <span class="ficha-numero">3456</span>
+                                </div>
+                            </div>
+                            <div class="ficha-item" data-numero="4321">
+                                <div class="ficha-imagen-container">
+                                    <div class="ficha-imagen">
+                                        <img src="ficha.png" onerror="this.parentElement.innerHTML='<span style=\'font-size:1.5rem;\'>🎲</span>'">
+                                    </div>
+                                    <span class="ficha-numero">4321</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <small class="text-muted">✨ ¡Pago inmediato si sale tu ficha bendecida! ✨</small>
+                        </div>
+                    </div>
+
+                    <!-- BARRA DE PROGRESO -->
+                    <div class="progress-wrapper mb-4">
+                        <div class="progress-label">
+                            <span>🎯 Meta: 10,000 boletas</span>
+                            <span id="porcentajeVentas">0%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="barraProgreso" style="width: 0%;"></div>
+                        </div>
+                        <div class="text-center mt-2">
+                            <small class="text-muted" id="boletasVendidas">0</small>
+                            <small class="text-muted"> / 10,000 boletas vendidas</small>
+                        </div>
+                    </div>
+
+                    <!-- PRECIO BOLETA -->
+                    <div class="precio-card">
+                        <div class="precio-label">Valor por boleta</div>
+                        <div class="precio-valor">$3.000</div>
+                        <div class="mt-2">
+                            <span class="badge bg-white text-dark rounded-pill px-3 py-2">🎟️ Mínimo 1 boleta</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN COMPRA -->
+    <section class="py-5" id="compra">
+        <div class="container">
+            <h2 class="font-serif fw-bold text-center mb-5">🎟️ Elige tu paquete</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="paquetes-grid mb-4">
+                        <!-- Paquete 1 boleta -->
+                        <div>
+                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq1" value="1" data-precio="3000">
+                            <label class="paquete-card d-block" for="paq1">
+                                <div class="cantidad">1</div>
+                                <div class="precio mt-2">$3.000</div>
+                                <div class="precio-original">$3.000</div>
+                            </label>
+                        </div>
+                        <!-- Paquete 5 boletas -->
+                        <div>
+                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq5" value="5" data-precio="13000">
+                            <label class="paquete-card d-block" for="paq5">
+                                <span class="descuento-badge">Ahorra $2.000</span>
+                                <div class="cantidad">5</div>
+                                <div class="precio mt-2">$13.000</div>
+                                <div class="precio-original">$15.000</div>
+                            </label>
+                        </div>
+                        <!-- Paquete 10 boletas -->
+                        <div>
+                            <input type="radio" class="btn-check paquete-radio" name="paqueteNumeros" id="paq10" value="10" data-precio="25000">
+                            <label class="paquete-card d-block" for="paq10">
+                                <span class="badge-popular">🔥 Más vendido</span>
+                                <div class="cantidad">10</div>
+                                <div class="precio mt-2">$25.000</div>
+                                <div class="precio-original">$30.000</div>
+                                <small class="d-block mt-2 text-success">¡Ahorra $5.000!</small>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- OPCIÓN LIBRE - Cantidad personalizada -->
+                    <div class="custom-input-group">
+                        <label class="d-block mb-2">📝 Cantidad personalizada</label>
+                        <div class="d-flex gap-3 align-items-center">
+                            <input type="number" id="cantidadCustom" class="form-control form-control-lg rounded-pill" 
+                                   min="1" step="1" placeholder="Ej: 25" style="max-width: 150px;">
+                            <button type="button" id="btnCustom" class="btn btn-dark rounded-pill px-4 py-2 fw-bold">
+                                Aplicar
+                            </button>
+                        </div>
+                        <small class="text-muted mt-2 d-block">✏️ Elige la cantidad que quieras (mínimo 1 boleta)</small>
+                    </div>
+
+                    <div class="alert alert-dark bg-light text-dark border-0 shadow-sm mt-4 text-center">
+                        💡 Más boletas = más oportunidades de ganar los grandes premios
+                    </div>
+                </div>
+
+                <!-- Sidebar carrito desktop -->
+                <div class="col-lg-4 d-none d-lg-block">
+                    <div class="card border-0 shadow-lg rounded-4 sticky-top" style="top: 100px; background: #f8f9fa;">
+                        <div class="card-body p-4">
+                            <h4 class="font-serif fw-bold mb-4">🛒 Tu compra</h4>
+                            <div class="d-flex justify-content-between py-3 border-top border-bottom">
+                                <span class="fw-semibold">Cantidad de boletas</span>
+                                <strong id="cantTicketsDesktop">0</strong>
+                            </div>
+                            <div class="d-flex justify-content-between py-3 fw-bold fs-5">
+                                <span>Total</span>
+                                <strong class="text-success" id="totalDineroDesktop">$0</strong>
+                            </div>
+                            <button class="btn btn-dark w-100 py-3 fw-bold rounded-pill mt-3" onclick="abrirCheckout()" id="btnPagarDesktop" disabled>
+                                Pagar ahora →
+                            </button>
+                            <div class="mt-3 pt-3 text-center">
+                                <small class="text-muted d-flex align-items-center justify-content-center gap-1">
+                                    <i class="ti ti-lock-square-rounded fs-5"></i>
+                                    Pagos 100% seguros
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-white pt-5 pb-4 border-top">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <img src="logo.png" alt="La Plebada" height="40" onerror="this.style.display='none'">
+                        <span class="font-serif fw-bold fs-4">La Plebada</span>
+                    </div>
+                    <p class="text-muted small">Sorteos 100% legales con toda la transparencia. Participa y haz realidad tus sueños.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h6 class="fw-bold mb-3">Enlaces de interés</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#compra" class="footer-link">Comprar boletas</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Política de privacidad</a></li>
+                        <li class="mb-2"><a href="#" class="footer-link">Términos y condiciones</a></li>
+                        <li><button class="btn btn-outline-dark btn-sm rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalBuscarTickets">🔍 Buscar mis boletas</button></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3">Contacto</h6>
+                    <p class="small text-muted mb-2"><i class="ti ti-phone me-2"></i> (+57) 300 000 0000</p>
+                    <p class="small text-muted mb-2"><i class="ti ti-mail me-2"></i> info@laplebada.com</p>
+                    <p class="small text-muted"><i class="ti ti-map-pin me-2"></i> Colombia</p>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center small text-muted">© 2026 La Plebada · Todos los derechos reservados</div>
+        </div>
+    </footer>
+
+    <!-- CARRITO MÓVIL -->
+    <div class="mobile-cart-bar position-fixed bottom-0 start-0 end-0 py-3 px-4 d-lg-none" id="mobileCart">
+        <div class="d-flex align-items-center justify-content-between">
+            <div>
+                <span class="text-muted small">Total a pagar</span>
+                <div class="font-serif fw-bold fs-3" id="lblTotalMobile">$0</div>
+                <span id="lblCantidadMobile" class="small text-muted">0 boletas</span>
+            </div>
+            <button class="btn btn-dark rounded-pill px-4 fw-bold" onclick="abrirCheckout()" id="btnPagarMobile" disabled>PAGAR 🔥</button>
+        </div>
+    </div>
+
+    <!-- MODALES -->
+    <div class="modal fade" id="modalBuscarTickets" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow-lg">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold">🔍 Buscar mis boletas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="tel" id="inputBuscarTickets" class="form-control form-control-lg rounded-pill text-center mb-3" placeholder="Ej: 3001234567">
+                    <button class="btn btn-dark w-100 rounded-pill py-2 fw-bold" onclick="buscarTickets()">Buscar</button>
+                    <div id="resultadoBusqueda" class="mt-3 text-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalCheckout" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow-xl">
+                <div class="modal-header bg-dark text-white border-0 rounded-top-4">
+                    <h5 class="modal-title fw-bold">🚀 Finalizar compra</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="formCheckout">
+                        <div class="card bg-light border-0 mb-4 rounded-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <span>Boletas</span>
+                                    <strong id="resumenNumeros">0</strong>
+                                </div>
+                                <div class="d-flex justify-content-between fw-bold fs-5 mt-2">
+                                    <span>Total</span>
+                                    <strong class="text-success" id="resumenTotal">$0</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="totalPagarInput">
+                        <h6 class="fw-bold mb-3">Datos del comprador</h6>
+                        <div class="mb-3">
+                            <input type="tel" class="form-control rounded-pill" id="celularCliente" placeholder="Celular" required>
+                        </div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <input type="text" class="form-control rounded-pill" id="nombreCliente" placeholder="Nombre" required>
+                            </div>
+                            <div class="col-6">
+                                <input type="text" class="form-control rounded-pill" id="apellidoCliente" placeholder="Apellido" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <select class="form-select rounded-pill" id="departamento" required>
+                                <option value="">Departamento</option>
+                                <option>Antioquia</option>
+                                <option>Bogotá</option>
+                                <option>Valle</option>
+                            </select>
+                        </div>
+                        <hr>
+                        <h6 class="fw-bold mb-3">Método de pago</h6>
+                        <div class="d-flex gap-2 mb-3">
+                            <button type="button" class="btn btn-outline-dark rounded-pill px-4" onclick="seleccionarMetodo('pse')">💳 PSE</button>
+                            <button type="button" class="btn btn-outline-success rounded-pill px-4" onclick="seleccionarMetodo('transferencia')">🏦 Transferencia</button>
+                        </div>
+                        <div id="metodoPSE" class="d-none">
+                            <button type="button" class="btn btn-warning w-100 rounded-pill py-2 fw-bold" onclick="iniciarPagoPSE()">Ir a pagar con PSE</button>
+                        </div>
+                        <div id="metodoTransferencia" class="d-none">
+                            <div class="card bg-light border-0 rounded-4">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-2 align-items-center">
+                                        <div><strong>Bancolombia</strong><br><span id="bancolombia">24000004828</span></div>
+                                        <button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="copiarTexto('bancolombia')">Copiar</button>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-3 align-items-center">
+                                        <div><strong>Nequi</strong><br><span id="nequi">3117835000</span></div>
+                                        <button class="btn btn-sm btn-outline-secondary rounded-pill" onclick="copiarTexto('nequi')">Copiar</button>
+                                    </div>
+                                    <input type="file" class="form-control mb-3" id="comprobantePago" accept="image/*">
+                                    <button type="button" class="btn btn-success w-100 rounded-pill py-2 fw-bold" onclick="procesarTransferencia(event)">Confirmar pago</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script>
+        // ========== VARIABLES ==========
+        let cantidadSeleccionada = 0;
+        let totalSeleccionado = 0;
+        const precioUnitario = 3000;
+        
+        // ========== BARRA DE PROGRESO ==========
+        let boletasVendidas = 2847;
+        const metaTotal = 10000;
+        let porcentaje = (boletasVendidas / metaTotal) * 100;
+        
+        function actualizarBarraProgreso() {
+            const barra = document.getElementById('barraProgreso');
+            const porcentajeTexto = document.getElementById('porcentajeVentas');
+            const boletasTexto = document.getElementById('boletasVendidas');
+            
+            if (barra) barra.style.width = porcentaje + '%';
+            if (porcentajeTexto) porcentajeTexto.innerText = Math.floor(porcentaje) + '%';
+            if (boletasTexto) boletasTexto.innerText = boletasVendidas.toLocaleString('es-CO');
+        }
+        
+        function incrementarVentas(cantidad) {
+            boletasVendidas += cantidad;
+            porcentaje = (boletasVendidas / metaTotal) * 100;
+            if (porcentaje > 100) porcentaje = 100;
+            actualizarBarraProgreso();
+        }
+        
+        // ========== FUNCIONES DE COMPRA ==========
+        function actualizarCompra(cantidad, total) {
+            cantidadSeleccionada = cantidad;
+            totalSeleccionado = total;
+            
+            document.getElementById('cantTicketsDesktop').innerText = cantidad;
+            document.getElementById('totalDineroDesktop').innerText = '$' + total.toLocaleString('es-CO');
+            document.getElementById('lblCantidadMobile').innerText = cantidad;
+            document.getElementById('lblTotalMobile').innerText = '$' + total.toLocaleString('es-CO');
+            document.getElementById('resumenNumeros').innerHTML = cantidad + ' boletas';
+            document.getElementById('resumenTotal').innerText = '$' + total.toLocaleString('es-CO');
+            document.getElementById('totalPagarInput').value = total;
+            
+            const btnDesktop = document.getElementById('btnPagarDesktop');
+            const btnMobile = document.getElementById('btnPagarMobile');
+            if (btnDesktop) btnDesktop.disabled = false;
+            if (btnMobile) btnMobile.disabled = false;
+            
+            document.getElementById('mobileCart').classList.add('visible');
+        }
+        
+        // Paquetes predefinidos
+        document.querySelectorAll('.paquete-radio').forEach(radio => {
+            radio.addEventListener('change', function() {
+                let cantidad = parseInt(this.value);
+                let total = cantidad * precioUnitario;
+                if (cantidad === 5) total = 13000;
+                if (cantidad === 10) total = 25000;
+                actualizarCompra(cantidad, total);
+            });
+        });
+        
+        // Opción libre personalizada
+        document.getElementById('btnCustom').addEventListener('click', function() {
+            let cantidad = parseInt(document.getElementById('cantidadCustom').value);
+            if (isNaN(cantidad) || cantidad < 1) {
+                alert('Ingresa una cantidad válida (mínimo 1 boleta)');
+                return;
+            }
+            let total = cantidad * precioUnitario;
+            actualizarCompra(cantidad, total);
+            // Desmarcar radios
+            document.querySelectorAll('.paquete-radio').forEach(r => r.checked = false);
+        });
+        
+        function abrirCheckout() {
+            if (cantidadSeleccionada < 1) {
+                alert('Selecciona al menos 1 boleta');
+                return;
+            }
+            new bootstrap.Modal(document.getElementById('modalCheckout')).show();
+        }
+        
+        function seleccionarMetodo(metodo) {
+            const pseDiv = document.getElementById('metodoPSE');
+            const transferenciaDiv = document.getElementById('metodoTransferencia');
+            if (pseDiv) pseDiv.classList.add('d-none');
+            if (transferenciaDiv) transferenciaDiv.classList.add('d-none');
+            
+            if (metodo === 'pse' && pseDiv) pseDiv.classList.remove('d-none');
+            if (metodo === 'transferencia' && transferenciaDiv) transferenciaDiv.classList.remove('d-none');
+        }
+        
+        function iniciarPagoPSE() {
+            alert('🔐 Redirigiendo a la pasarela de pagos PSE...');
+        }
+        
+        function procesarTransferencia(event) {
+            event.preventDefault();
+            const comprobante = document.getElementById('comprobantePago');
+            if (comprobante && !comprobante.files.length) {
+                alert('📎 Por favor, sube el comprobante de transferencia');
+                return;
+            }
+            alert('✅ Transferencia registrada. En breve recibirás confirmación y tus boletas.');
+            incrementarVentas(cantidadSeleccionada);
+            bootstrap.Modal.getInstance(document.getElementById('modalCheckout')).hide();
+            cantidadSeleccionada = 0;
+            actualizarCompra(0, 0);
+        }
+        
+        function copiarTexto(id) {
+            const elemento = document.getElementById(id);
+            if (elemento) {
+                navigator.clipboard.writeText(elemento.innerText);
+                alert('📋 Copiado: ' + elemento.innerText);
+            }
+        }
+        
+        function buscarTickets() {
+            let telefono = document.getElementById('inputBuscarTickets').value;
+            if (telefono.length < 7) {
+                alert('📱 Ingresa un número de teléfono válido');
+                return;
+            }
+            const resultado = document.getElementById('resultadoBusqueda');
+            resultado.innerHTML = '<div class="alert alert-info">🔍 Buscando tus boletas...</div>';
+            setTimeout(() => {
+                resultado.innerHTML = '<div class="alert alert-warning">⚠️ No encontramos boletas asociadas a ' + telefono + '. ¡Compra ahora y participa!</div>';
+            }, 1500);
+        }
+        
+        // ========== INICIALIZAR ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            actualizarBarraProgreso();
+            
+            if (typeof Splide !== 'undefined') {
+                new Splide('#main-carousel', {
+                    type: 'loop',
+                    perPage: 1,
+                    arrows: true,
+                    pagination: true,
+                    autoplay: true,
+                    interval: 4000
+                }).mount();
+                
+                new Splide('#thumbnail-carousel', {
+                    type: 'slide',
+                    perPage: 3,
+                    gap: '10px',
+                    arrows: false,
+                    isNavigation: true,
+                }).mount();
+            }
+        });
+        
+        window.abrirCheckout = abrirCheckout;
+        window.seleccionarMetodo = seleccionarMetodo;
+        window.iniciarPagoPSE = iniciarPagoPSE;
+        window.procesarTransferencia = procesarTransferencia;
+        window.copiarTexto = copiarTexto;
+        window.buscarTickets = buscarTickets;
+    </script>
+</body>
+
+</html>
